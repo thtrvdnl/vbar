@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="wrapper">
+    <MenuBar />
+    <Main />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+// Have to solve vue3 reactivity problem and create a simple application template
+import MenuBar from '@/components/MenuBar'
+import Main from '@/components/Main'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld,
-  },
-};
+    MenuBar,
+    Main
+  }
+}
 </script>
+
+<style lang="scss">
+.wrapper {
+  height: 100vh;
+}
+</style>

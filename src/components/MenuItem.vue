@@ -1,12 +1,19 @@
 <template>
   <li class="menu-item">
     <span class="menu-item-small">☺</span>
-    <span class="menu-item-full">Item 1</span>
+    <span :class="`menu-item-full ${menuState ? ' active' : ''}`">Item 1</span>
   </li>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    menuState: {
+      type: Boolean,
+      required: true
+    }
+  }
+}
 </script>
 
 <style lang="scss">

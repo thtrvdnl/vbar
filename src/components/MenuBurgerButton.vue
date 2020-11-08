@@ -1,18 +1,21 @@
 <template>
   <div class="burger-wrapper">
     <button class="burger" id="burger" @click="changeMenuState">
-      <div class="burger-line burger-line-1"></div>
-      <div class="burger-line burger-line-2"></div>
-      <div class="burger-line burger-line-3"></div>
-      <div class="burger-line burger-line-4"></div>
+      <div :class="`burger-line burger-line-1 ${menuState ? ' active' : ''}`"></div>
+      <div :class="`burger-line burger-line-2 ${menuState ? ' active' : ''}`"></div>
+      <div :class="`burger-line burger-line-3 ${menuState ? ' active' : ''}`"></div>
+      <div :class="`burger-line burger-line-4 ${menuState ? ' active' : ''}`"></div>
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {}
+  props: {
+    menuState: {
+      type: Boolean,
+      required: true
+    }
   },
   methods: {
     changeMenuState() {

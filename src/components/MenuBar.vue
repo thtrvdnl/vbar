@@ -1,14 +1,14 @@
 <template>
-  <nav class="navbar">
-    <MenuBurgerButton v-model="menuState" @changeMenuState="changeMenuState" />
+  <nav :class="`navbar ${menuState ? ' active' : ''}`">
+    <MenuBurgerButton :menuState="menuState" @changeMenuState="changeMenuState" />
     <ul class="menu" id="menu">
-      <MenuItem />
+      <MenuItem :menuState="menuState" />
     </ul>
   </nav>
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+// import { reactive, toRefs } from 'vue'
 import MenuBurgerButton from './MenuBurgerButton'
 import MenuItem from './MenuItem'
 
@@ -17,20 +17,15 @@ export default {
     MenuBurgerButton,
     MenuItem
   },
-  setup() {
-    const menuState = reactive({
+  data() {
+    return {
       menuState: false
-    })
-
-    function changeMenuState() {
-      if (menuState.value) {
-        event.menuState = false
-      } else {
-        event.menuState = true
-      }
     }
-
-    return { ...toRefs(menuState), changeMenuState }
+  },
+  methods: {
+    changeMenuState() {
+      this.menuState = !this.menuState
+    }
   }
 }
 </script>

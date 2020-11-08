@@ -2,19 +2,15 @@
   <nav :class="`navbar ${menuState ? ' active' : ''}`">
     <MenuBurgerButton :menuState="menuState" @changeMenuState="changeMenuState" />
     <ul class="menu" id="menu">
-      <MenuItem v-for="{ id, icon, text } of menuItems" :key="id" :menuState="menuState" :icon="icon" :text="text" />
+      <MenuItem v-for="item of menuItems" :key="item.id" :menuState="menuState" :item="item" />
     </ul>
   </nav>
 </template>
 
 <script>
-// import { reactive, toRefs } from 'vue'
-// import axios from 'axios'
-
+//TODO: Router (nav) links
 import MenuBurgerButton from './MenuBurgerButton'
 import MenuItem from './MenuItem'
-
-import { menu } from '@/api/menuItems'
 
 export default {
   components: {
@@ -24,7 +20,26 @@ export default {
   data() {
     return {
       menuState: false,
-      menuItems: menu.items || []
+      menuItems: [
+        {
+          id: 'home',
+          icon: 'home',
+          text: 'Домашняя',
+          link: '/'
+        },
+        {
+          id: 'profile',
+          icon: 'user',
+          text: 'Профиль',
+          link: '/user/'
+        },
+        {
+          id: 'search',
+          icon: 'search',
+          text: 'Поиск',
+          link: '/search'
+        }
+      ]
     }
   },
   methods: {
@@ -41,15 +56,21 @@ export default {
   top: 0;
   left: 0;
   width: 60px;
-  background-color: #fff;
+  background-color: rgb(235, 235, 245);
   padding: 30px 0 20px 0;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  transition: width 0.2s ease-in-out;
+  transition-property: width, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  // transition: width 0.2s ease-in-out;
+  // border-right: 3px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 0 0 10px 0 rgba(200, 200, 200, 0.8);
   &.active {
     width: 200px;
+    box-shadow: 0 0 20px 0 rgba(200, 200, 200, 0.6);
   }
 }
 .menu {

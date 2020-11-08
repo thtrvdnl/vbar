@@ -26,4 +26,15 @@ export default {
 ul {
   list-style-type: none;
 }
+
+a {
+  &,
+  &:visited {
+    color: rgb(20, 20, 20);
+  }
+  &:hover {
+    color: rgb(120, 120, 120);
+  }
+  text-decoration: none;
+}
 </style>

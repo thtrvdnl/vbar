@@ -46,7 +46,7 @@ $bgLight: rgb(15, 15, 15);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin: 0 15px 0 0;
+    margin: 0 15px 15px 0;
   }
 
   &:hover > &-line {

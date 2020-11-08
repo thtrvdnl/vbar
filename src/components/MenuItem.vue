@@ -14,11 +14,15 @@ export default {
       type: Boolean,
       required: true
     },
-    icon: {
-      type: String
-    },
-    text: {
-      type: String
+    item: {
+      type: Object
+    }
+  },
+  data() {
+    return {
+      icon: this.item.icon,
+      text: this.item.text,
+      link: this.item.link
     }
   }
 }
@@ -27,7 +31,7 @@ export default {
 <style lang="scss">
 $tooDarkBg: rgb(15, 15, 15);
 $darkText: rgb(20, 20, 20);
-$iconSize: 18px;
+$iconSize: 24px;
 
 .menu-item {
   position: relative;
@@ -39,10 +43,22 @@ $iconSize: 18px;
   height: 45px;
   max-height: 45px;
   letter-spacing: 0.5px;
-  color: $darkText;
-  border-bottom: 1px solid rgb(50, 50, 50);
-  border-top: 1px solid rgb(100, 100, 100);
+  border-bottom: 1px solid rgb(200, 200, 200);
   cursor: pointer;
+
+  &-link {
+    display: block;
+    width: 100%;
+    height: 45px;
+    max-height: 45px;
+    color: $darkText;
+    text-decoration: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
   &-full {
     font-size: 0;
     transition: font-size 0.2s ease-in-out;
@@ -50,6 +66,7 @@ $iconSize: 18px;
       font-size: 1.2em;
     }
   }
+
   &-small {
     display: flex;
     align-items: center;
@@ -57,25 +74,30 @@ $iconSize: 18px;
     & > .icon {
       width: 0;
       height: 0;
+      fill: transparent;
     }
     &.active > .icon {
       fill: $darkText;
       width: $iconSize;
       height: $iconSize;
-      transition: all 0.2s ease-in-out;
+      transition-property: width, height, fill;
+      transition-timing-function: ease-in-out;
+      transition-duration: 0.2s;
     }
   }
+
   &:hover {
     color: rgb(150, 150, 150);
+
     &::before {
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       bottom: 0;
       width: 3px;
-      background: $tooDarkBg;
+      background: rgb(35, 90, 120);
     }
   }
 }

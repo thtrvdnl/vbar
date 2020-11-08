@@ -9,6 +9,8 @@
 
 <script>
 // import { reactive, toRefs } from 'vue'
+// import axios from 'axios'
+
 import MenuBurgerButton from './MenuBurgerButton'
 import MenuItem from './MenuItem'
 

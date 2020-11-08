@@ -2,6 +2,16 @@
   <router-view />
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isLoading: null
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 

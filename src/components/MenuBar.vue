@@ -2,7 +2,7 @@
   <nav :class="`navbar ${menuState ? ' active' : ''}`">
     <MenuBurgerButton :menuState="menuState" @changeMenuState="changeMenuState" />
     <ul class="menu" id="menu">
-      <MenuItem :menuState="menuState" />
+      <MenuItem v-for="{ id, icon, text } of menuItems" :key="id" :menuState="menuState" :icon="icon" :text="text" />
     </ul>
   </nav>
 </template>
@@ -14,6 +14,8 @@
 import MenuBurgerButton from './MenuBurgerButton'
 import MenuItem from './MenuItem'
 
+import { menu } from '@/api/menuItems'
+
 export default {
   components: {
     MenuBurgerButton,
@@ -21,7 +23,8 @@ export default {
   },
   data() {
     return {
-      menuState: false
+      menuState: false,
+      menuItems: menu.items || []
     }
   },
   methods: {

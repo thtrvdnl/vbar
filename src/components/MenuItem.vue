@@ -1,7 +1,9 @@
 <template>
   <li class="menu-item">
-    <span class="menu-item-small">☺</span>
-    <span :class="`menu-item-full ${menuState ? ' active' : ''}`">Item 1</span>
+    <span :class="`menu-item-small ${menuState ? '' : ' active'}`">
+      <fa :icon="icon" class="icon"></fa>
+    </span>
+    <span :class="`menu-item-full ${menuState ? ' active' : ''}`">{{ text }}</span>
   </li>
 </template>
 
@@ -11,6 +13,12 @@ export default {
     menuState: {
       type: Boolean,
       required: true
+    },
+    icon: {
+      type: String
+    },
+    text: {
+      type: String
     }
   }
 }
@@ -19,6 +27,7 @@ export default {
 <style lang="scss">
 $tooDarkBg: rgb(15, 15, 15);
 $darkText: rgb(20, 20, 20);
+$iconSize: 18px;
 
 .menu-item {
   position: relative;
@@ -42,7 +51,19 @@ $darkText: rgb(20, 20, 20);
     }
   }
   &-small {
-    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .icon {
+      width: 0;
+      height: 0;
+    }
+    &.active > .icon {
+      fill: $darkText;
+      width: $iconSize;
+      height: $iconSize;
+      transition: all 0.2s ease-in-out;
+    }
   }
   &:hover {
     color: rgb(150, 150, 150);

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,200&display=swap");
 *,
 *::before,
 *::after {
@@ -6,6 +7,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   outline: none;
+  font-family: Montserrat, Arial, sans-serif;
 }
 
 ul {
@@ -20,25 +22,10 @@ a:hover {
   cursor: pointer;
 }
 
-.wrapper {
-  position: relative;
-  background-color: #eff2f8;
-  min-width: 320px;
-  height: 100vh;
-  max-width: 1200px;
-  max-height: 100vh;
-  margin: 0 auto;
-  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
-}
-
-.main {
-  display: none;
-}
-
 .menu {
+  z-index: 10;
   padding: 0 10px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
@@ -59,21 +46,11 @@ a:hover {
 
 .menu-list {
   font-size: 0;
-  max-width: 300px;
+  width: 600px;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
 }
 
 .menu-link {
@@ -104,7 +81,30 @@ a:hover {
 }
 
 .menu-item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 60px;
+          flex: 1 1 60px;
   height: 100%;
-  width: 60px;
+  margin: 0 10px 0 0;
+}
+
+.menu-item:last-child {
+  margin-right: 0;
+}
+
+.wrapper {
+  position: relative;
+  background-color: #eff2f8;
+  min-width: 320px;
+  height: 100vh;
+  max-width: 1200px;
+  max-height: 100vh;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
+}
+
+.main {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */

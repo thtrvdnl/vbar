@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: Montserrat, Arial, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+p {
+  font-weight: 200;
+  font-style: italic;
+}

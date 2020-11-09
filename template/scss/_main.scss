@@ -24,13 +24,61 @@
       & > * {
         height: 80px;
         line-height: 120px;
-        font-size: 28px;
+        font-size: $xlFontSize;
         display: inline-block;
+      }
+    }
+
+    &-about {
+      font-size: $mFontSize;
+      color: $textDark;
+      word-spacing: 8px;
+    }
+
+    &-chips {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    &-item {
+      height: $tagHeight;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $dark-25;
+      border-radius: 10px;
+      padding: 0 10px;
+      user-select: none;
+      white-space: nowrap;
+      margin: 0 10px 10px 0;
+
+      &-text {
+        font-size: $sFontSize;
+        font-weight: $bold;
+        line-height: $tagHeight;
+        color: $textDark;
       }
     }
   }
 
   &-body {
-    display: none;
+    width: 100%;
+    padding: 30px 10px 70px;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .section {
+      margin-bottom: $lFontSize;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &-title {
+        font-size: $lFontSize;
+        margin-bottom: 0.5em;
+      }
+    }
   }
 }

@@ -1,14 +1,26 @@
-// ~~~VARS-START~~~
+// colors
 $mainBg: #eff2f8;
+$dark-60: rgba(0, 0, 0, 0.6);
+$dark-25: rgba(0, 0, 0, 0.25);
+$dark-10: rgba(0, 0, 0, 0.1);
+$iconDark: #1c2833;
+$textDark: #2e343b;
+
+// sizes
 $minWidth: 320px;
 $maxWidth: 1200px;
 $defHeight: 100vh;
-$dark-25: rgba(0, 0, 0, 0.25);
-$dark-10: rgba(0, 0, 0, 0.1);
-$menuIconSize: 36px;
-$iconDark: #1c2833;
-$textDark: #2e343b;
 $menuWidth: 600px;
+$menuHeight: 60px;
 $maxImageHeight: 450px;
-$maxImageWidth: 414px;
-// ~~~VARS-END~~~
+$maxImageWidth: 425px;
+$tagHeight: 30px;
+
+// fonts
+$sFontSize: 16px;
+$mFontSize: 18px;
+$lFontSize: 24px;
+$xlFontSize: 28px;
+$xxlFontSize: 36px;
+$light: 200;
+$bold: 600;

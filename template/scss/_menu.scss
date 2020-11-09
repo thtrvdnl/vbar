@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: $menuHeight;
   background-color: #fff;
   box-shadow: 0 -5px 10px -5px $dark-25;
 
@@ -30,7 +30,7 @@
     transition: background-color 0.133s ease-in-out;
 
     & > .material-icons {
-      font-size: $menuIconSize;
+      font-size: $xxlFontSize;
       color: $iconDark;
     }
 
@@ -41,7 +41,7 @@
   }
 
   &-item {
-    flex: 1 1 60px;
+    flex: 1 1 $menuHeight;
     height: 100%;
     margin: 0 10px 0 0;
     &:last-child {

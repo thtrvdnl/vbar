@@ -34,7 +34,6 @@ h6 {
 
 p {
   font-weight: 200;
-  font-style: italic;
 }
 
 .menu {
@@ -110,7 +109,7 @@ p {
 .main .avatar {
   width: 100%;
   height: 450px;
-  max-width: 414px;
+  max-width: 425px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: 50% 50%;
@@ -140,17 +139,83 @@ p {
   display: inline-block;
 }
 
+.main .person-about {
+  font-size: 18px;
+  color: #2e343b;
+  word-spacing: 8px;
+}
+
+.main .person-chips {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.main .person-item {
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 0 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+  margin: 0 10px 10px 0;
+}
+
+.main .person-item-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #2e343b;
+}
+
 .main-body {
-  display: none;
+  width: 100%;
+  padding: 30px 10px 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.main-body .section {
+  margin-bottom: 24px;
+}
+
+.main-body .section:last-child {
+  margin-bottom: 0;
+}
+
+.main-body .section-title {
+  font-size: 24px;
+  margin-bottom: 0.5em;
 }
 
 .wrapper {
   position: relative;
   background-color: #eff2f8;
   min-width: 320px;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1200px;
-  max-height: 100vh;
   margin: 0 auto;
   -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
           box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);

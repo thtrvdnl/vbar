@@ -1,0 +1,97 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+// ~~~VARS-START~~~
+$mainBg: #eff2f8;
+$minWidth: 320px;
+$maxWidth: 1200px;
+$defHeight: 100vh;
+$dark-25: rgba(0, 0, 0, 0.25);
+$dark-10: rgba(0, 0, 0, 0.1);
+$menuIconSize: 36px;
+$iconDark: #1c2833;
+$textDark: #2e343b;
+// ~~~VARS-END~~~
+
+.wrapper {
+  position: relative;
+  background-color: $mainBg;
+  min-width: $minWidth;
+  height: $defHeight;
+  max-width: $maxWidth;
+  max-height: $defHeight;
+  margin: 0 auto;
+  box-shadow: 0 0 15px 3px $dark-25;
+}
+
+.main {
+  display: none;
+}
+
+.menu {
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 -5px 10px -5px $dark-25;
+
+  &-list {
+    font-size: 0;
+    max-width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+  }
+
+  &-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    transition: background-color 0.133s ease-in-out;
+
+    & > .material-icons {
+      font-size: $menuIconSize;
+      color: $iconDark;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $dark-10;
+    }
+  }
+
+  &-item {
+    height: 100%;
+    width: 60px;
+  }
+}

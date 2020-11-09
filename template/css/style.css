@@ -1,1 +1,110 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
+  background-color: #eff2f8;
+  min-width: 320px;
+  height: 100vh;
+  max-width: 1200px;
+  max-height: 100vh;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
+}
+
+.main {
+  display: none;
+}
+
+.menu {
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 60px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 -5px 10px -5px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 -5px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.menu-list {
+  font-size: 0;
+  max-width: 300px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+.menu-link {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  background-color: transparent;
+  -webkit-transition: background-color 0.133s ease-in-out;
+  transition: background-color 0.133s ease-in-out;
+}
+
+.menu-link > .material-icons {
+  font-size: 36px;
+  color: #1c2833;
+}
+
+.menu-link:hover, .menu-link:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  height: 100%;
+  width: 60px;
+}
+/*# sourceMappingURL=style.css.map */

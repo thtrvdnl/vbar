@@ -41,8 +41,8 @@ p {
   padding: 0 10px;
   position: fixed;
   bottom: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
+  max-width: 769px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -53,7 +53,7 @@ p {
       -ms-flex-align: center;
           align-items: center;
   height: 60px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.95);
   -webkit-box-shadow: 0 -5px 10px -5px rgba(0, 0, 0, 0.25);
           box-shadow: 0 -5px 10px -5px rgba(0, 0, 0, 0.25);
 }
@@ -114,12 +114,27 @@ p {
      object-fit: cover;
   -o-object-position: 50% 50%;
      object-position: 50% 50%;
-  -webkit-box-shadow: 0px 20px 50px 0 rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 20px 50px 0 rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 20px 50px 0 rgba(0, 0, 0, 0.1), 0 0 20px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 20px 50px 0 rgba(0, 0, 0, 0.1), 0 0 20px 0 rgba(0, 0, 0, 0.25);
 }
 
 .main .avatar-wrapper {
   position: relative;
+}
+
+.main .banner {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.main .banner-img {
+  display: block;
+  position: absolute;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
 }
 
 .main .person-wrapper {
@@ -210,14 +225,32 @@ p {
   margin-bottom: 0.5em;
 }
 
+body {
+  background-color: #1c2833;
+}
+
 .wrapper {
   position: relative;
   background-color: #eff2f8;
   min-width: 320px;
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 769px;
   margin: 0 auto;
+  padding: 0 0 30px 0;
   -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
           box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 769px) {
+  .wrapper {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    margin: 50px auto 0;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+  .main-body {
+    padding: 20px 50px 70px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

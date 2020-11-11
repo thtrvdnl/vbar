@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   height: $menuHeight;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: $light-95;
   box-shadow: 0 -5px 10px -5px $dark-25;
 
   &-list {

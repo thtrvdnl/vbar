@@ -85,7 +85,8 @@ p {
   transition: background-color 0.133s ease-in-out;
 }
 
-.menu-link > .material-icons {
+.menu-link > .material-icons,
+.menu-link > .material-icons-outlined {
   font-size: 36px;
   color: #1c2833;
 }
@@ -120,6 +121,43 @@ p {
 
 .main .avatar-wrapper {
   position: relative;
+}
+
+.main .buttons-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.main .btn:last-child {
+  margin-right: 0;
+}
+
+.main .btn-rounded {
+  border-radius: 50%;
 }
 
 .main .banner {
@@ -172,7 +210,7 @@ p {
 }
 
 .main .person-item {
-  height: 30px;
+  height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -183,8 +221,8 @@ p {
       -ms-flex-pack: center;
           justify-content: center;
   background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  padding: 0 10px;
+  border-radius: 20px;
+  padding: 0 15px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -196,7 +234,7 @@ p {
 .main .person-item-text {
   font-size: 16px;
   font-weight: 600;
-  line-height: 30px;
+  line-height: 40px;
   color: #2e343b;
 }
 

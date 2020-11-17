@@ -1,57 +1,34 @@
-import jwt
-
-from django.conf import settings
-from datetime import datetime, timedelta
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core import validators
-
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
-
-from .utils import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    """
-    Defines our custom User class.
-    Username, email and password are required.
-    """
-    username = models.CharField(db_index=True, max_length=255, unique=True)
-    email = models.EmailField(
-        validators=[validators.validate_email],
-        unique=True,
-        blank=False
-    )
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+class User(AbstractUser):
+    """ Custom user - describes user profile."""
+    GENDER = (('male', 'male'),
+              ('female', 'female'),
+              ('machine', 'machine'))
+    email = models.EmailField(_('email address'), unique=True)
+    middle_name = models.CharField(max_length=50, blank=False, null=True)
+    last_join = models.DateField(null=True)
+    phone = models.CharField(max_length=14, null=True)
+    avatar = models.ImageField(upload_to='user/avatar', blank=True)
+    birth_day = models.DateField(blank=True, null=True)
+    gender = models.CharField(max_length=7, choices=GENDER, default='machine')
+    about = models.CharField(max_length=500, blank=True)
+    interesting = models.CharField(max_length=350, blank=True)
+    beer_grade = models.CharField(max_length=350, blank=True)
+    topics_communication = models.CharField(max_length=350, blank=True)
+    vk = models.CharField(max_length=350, blank=True, null=True)
 
-    USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ('username',)
+class Friend(models.Model):
+    user_from = models.ForeignKey('User', on_delete=models.CASCADE)
+    user_to = models.ForeignKey('User', on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True, db_index=True)
 
-    objects = UserManager()
+    class Meta:
+        ordering = ('-created',)
 
     def __str__(self):
-        return self.username
-
-    @property
-    def token(self):
-        """ user.generate_jwt_token() -> user.token """
-        return self._generate_jwt_token()
-
-    def get_full_name(self):
-        return self.username
-
-    def get_short_name(self):
-        return self.username
-
-    def _generate_jwt_token(self):
-        """ Create web-token Json. """
-        dt = datetime.now() + timedelta(days=60)
-
-        token = jwt.encode({
-            'id': self.pk,
-            'exp': int(dt.strftime('%s'))
-        }, settings.SECRET_KEY, algorithm='HS256')
-
-        return token.decode('utf-8')
+        return f'{self.user_from} follows {self.user_to}'

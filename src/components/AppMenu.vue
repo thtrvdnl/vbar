@@ -1,3 +1,32 @@
+<template>
+  <nav id="menu" class="menu">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/profile"><i class="material-icons-outlined">account_circle</i></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" href="/search"><i class="material-icons">search</i></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" href="/chat"><i class="material-icons-outlined">chat</i></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" href="/liked"><i class="material-icons-outlined">thumb_up</i></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" href="/settings"><i class="material-icons-outlined">settings</i></a>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss">
+@import '../assets/vars';
+
 .menu {
   z-index: 10;
   padding: 0 10px;
@@ -50,3 +79,4 @@
     }
   }
 }
+</style>

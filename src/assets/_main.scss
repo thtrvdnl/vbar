@@ -4,6 +4,7 @@
     padding: 30px 10px 70px;
     display: flex;
     flex-flow: column nowrap;
+    transition: padding 0.3s ease-in-out;
   }
 }
 
@@ -38,7 +39,7 @@
   margin-right: 20px;
   color: $light-95;
   box-shadow: 0 0 5px 0 $dark-35;
-  transition-property: box-shadow, opacity;
+  transition-property: box-shadow, opacity, width, height;
   transition-duration: 0.133s;
   transition-timing-function: ease-in-out;
 
@@ -60,29 +61,7 @@
   }
 }
 
-#block {
-  background: #ed213a;
-  background: linear-gradient(to right, #93291e, #ed213a);
-}
-
-#like {
-  background: #ff512f;
-  background: linear-gradient(to right, #dd2476, #ff512f);
-}
-
-#message {
-  background: #2193b0;
-  background: linear-gradient(to right, #2193b0, #6dd5ed);
-}
-
-#skip {
-  background: #232526;
-  background: linear-gradient(to right, #414345, #232526);
-}
-
 .banner {
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
   position: relative;
   text-align: center;
   overflow: hidden;

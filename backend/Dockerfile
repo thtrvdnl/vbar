@@ -20,4 +20,4 @@ RUN adduser --disabled-password --gecos '' user
 
 USER user
 
-№ENTRYPOINT ["sh", "/entrypoint.sh"]
+#ENTRYPOINT ["sh", "/entrypoint.sh"]

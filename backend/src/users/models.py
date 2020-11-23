@@ -21,7 +21,7 @@ class User(AbstractUser):
     topics_communication = models.CharField(max_length=350, blank=True)
     vk = models.CharField(max_length=350, blank=True, null=True)
 
-
+"""
 class Friend(models.Model):
     user_from = models.ForeignKey('User', on_delete=models.CASCADE)
     user_to = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -32,3 +32,4 @@ class Friend(models.Model):
 
     def __str__(self):
         return f'{self.user_from} follows {self.user_to}'
+"""

@@ -26,39 +26,23 @@
 
 <script>
 const URL = 'http://localhost:8000/auth/users/'
-// function fetchConfig(dataBody) {
-//   return {
-//     method: 'POST',
-//     mode: 'no-cors',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(dataBody)
-//   }
-// }
+function fetchConfig() {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username: 'SegaHAA',
+    email: 'ssge@a.com', password: 'hosspa12345'})
+  }
+    fetch(URL, requestOptions)
+    .then(response => response.json())
+}
 
 export default {
   methods: {
     async btnClick() {
-      if (this.password === this.repeatedPassword && /@/.test(this.email) && this.username.trim()) {
-        var data = JSON.stringify({ email: 's@m.ru1', username: 'sig1a1', password: 'zxc123as1d' })
-
-        var xhr = new XMLHttpRequest()
-        xhr.withCredentials = true
-
-        xhr.addEventListener('readystatechange', function() {
-          if (this.readyState === 4) {
-            console.log(this.responseText)
-          }
-        })
-
-        xhr.open('POST', 'http://localhost:8000/auth/users/')
-        xhr.setRequestHeader('Content-Type', 'application/json')
-
-        xhr.send(data)
-      } else {
-        console.log('Bad data')
-      }
+      fetchConfig()
     }
   },
   data() {

@@ -14,16 +14,20 @@
       <i
         v-if="inputTypeProp === 'password' && inputType === 'password'"
         @click="inputType = 'text'"
-        class="input-icon material-icons-outlined"
+        class="input-icon input-icon-password material-icons-outlined"
         >visibility</i
       >
       <i
         v-if="inputTypeProp === 'password' && inputType !== 'password'"
         @click="inputType = 'password'"
-        class="input-icon material-icons-outlined"
+        class="input-icon input-icon-password material-icons-outlined"
         >visibility_off</i
       >
     </div>
+    <i
+      :class="`input-icon ${iconClass ? 'input-icon-' + iconClass : ''} material-icons${isOutlined ? '-outlined' : ''}`"
+      >{{ icon }}</i
+    >
   </div>
 </template>
 
@@ -53,6 +57,17 @@ export default {
     },
     dataPropName: {
       type: String
+    },
+    icon: {
+      type: String
+    },
+    isOutlined: {
+      type: Boolean,
+      default: false
+    },
+    iconClass: {
+      type: String,
+      default: 'input-icon'
     }
   },
   data() {
@@ -71,13 +86,16 @@ export default {
 <style lang="scss">
 @import '../assets/vars';
 $inputHeight: 50px;
-$inputWidth: 300px;
+$inputWidth: 320px;
 $inputTextPaddingTop: 12px;
+$inputIconPaddingSide: 10px;
+$labelPaddingLeft: 40px;
 
 .input {
-  font-size: 18px;
+  font-size: 16px;
 
   &-wrapper {
+    position: relative;
     display: flex;
     flex-flow: column-reverse nowrap;
     align-items: center;
@@ -91,13 +109,14 @@ $inputTextPaddingTop: 12px;
     }
     position: absolute;
     top: $inputTextPaddingTop;
-    left: 15px;
+    left: $labelPaddingLeft;
     font-size: 20px;
     margin-bottom: 5px;
     color: gray;
     transition-property: top, left, font-size, color;
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
+    user-select: none;
   }
   &-field {
     background: white;
@@ -106,8 +125,8 @@ $inputTextPaddingTop: 12px;
     width: $inputWidth;
     height: $inputHeight;
     line-height: $inputHeight;
-    font-size: 20px;
-    padding: 5px 15px;
+    font-size: 16px;
+    padding: 5px $labelPaddingLeft;
     transition: border-bottom 0.2s ease-in-out;
     border-radius: 0;
 
@@ -135,15 +154,29 @@ $inputTextPaddingTop: 12px;
     &:focus:not(:placeholder-shown) ~ .input-label-wrapper .input-label {
       color: blue;
     }
+    &:valid ~ .input-icon {
+      color: green;
+    }
+    &:invalid:not(:placeholder-shown) ~ .input-icon {
+      color: red;
+    }
+    &:focus:not(:placeholder-shown) ~ .input-icon {
+      color: blue;
+    }
   }
   &-icon {
-    color: $textDark;
     position: absolute;
-    right: 10px;
     top: $inputTextPaddingTop;
-    cursor: pointer;
+    color: $textDark;
     user-select: none;
     background-color: #fff;
+    &-password {
+      right: $inputIconPaddingSide;
+      cursor: pointer;
+    }
+    &-before {
+      left: $inputIconPaddingSide;
+    }
   }
 }
 </style>

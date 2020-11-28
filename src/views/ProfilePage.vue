@@ -5,13 +5,14 @@
       <div class="main-body">
         <section class="section section-actions">
           <div class="buttons-wrapper">
-            <profile-button
+            <app-button
               v-for="button in buttons"
               :key="button.id"
               :buttonId="button.id"
-              :buttonType="button.type"
+              buttonClass="btn btn-rounded"
               :isOutlined="button.isOutlined"
-            />
+              ><i :class="`material-icons${button.isOutlined ? '-outlined' : ''}`">{{ button.icon }}</i></app-button
+            >
           </div>
         </section>
         <section class="section section-about">
@@ -39,11 +40,11 @@
 <script>
 import ProfileMenu from '@/components/ProfileMenu'
 import ProfileChip from '@/components/ProfileChip'
-import ProfileButton from '@/components/ProfileButton'
+import AppButton from '@/components/AppButton'
 import ProfileAvatar from '@/components/ProfileAvatar'
 
 export default {
-  components: { ProfileMenu, ProfileChip, ProfileButton, ProfileAvatar },
+  components: { ProfileMenu, ProfileChip, AppButton, ProfileAvatar },
   data() {
     return {
       titles: {
@@ -63,21 +64,21 @@ export default {
       },
       buttons: [
         {
-          type: 'block',
+          icon: 'block',
           id: 'block'
         },
         {
-          type: 'thumb_up',
+          icon: 'thumb_up',
           id: 'like',
           isOutlined: true
         },
         {
-          type: 'create',
+          icon: 'create',
           id: 'message',
           isOutlined: true
         },
         {
-          type: 'arrow_forward',
+          icon: 'arrow_forward',
           id: 'skip'
         }
       ]

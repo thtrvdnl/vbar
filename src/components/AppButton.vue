@@ -1,5 +1,13 @@
 <template>
-  <button :disabled="isDisabled" :class="buttonClass" :type="buttonType"><slot /></button>
+  <button
+    :id="buttonId"
+    :disabled="isDisabled"
+    :class="buttonClass"
+    :type="buttonType"
+    :title="isDisabled ? 'Сначала заполните поля' : ''"
+  >
+    <slot />
+  </button>
 </template>
 
 <script>
@@ -16,10 +24,10 @@ export default {
     buttonClass: {
       type: String,
       default: 'btn'
+    },
+    buttonId: {
+      type: String
     }
-
-    // Redo button as Object
-    // Change profile button to app button in profilepage
   }
 }
 </script>
@@ -36,16 +44,17 @@ export default {
   height: 60px;
   border: none;
   padding: 15px;
-  margin-right: 20px;
   color: $light-95;
   box-shadow: 0 0 5px 0 $dark-35;
-  transition-property: box-shadow, opacity, width, height;
+  transition-property: transform, box-shadow, opacity, width, height;
   transition-duration: 0.133s;
   transition-timing-function: ease-in-out;
+  user-select: none;
 
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     box-shadow: 0 2px 5px 1px $dark-35;
+    transform: scale(0.99);
   }
 
   & > i {
@@ -63,7 +72,9 @@ export default {
 
   &-rounded {
     border-radius: 50%;
+    margin-right: 20px;
   }
+
   &-send {
     width: 300px;
     border-radius: 50px;
@@ -73,6 +84,17 @@ export default {
     &:hover:not(.btn:disabled) {
       background-color: green;
     }
+  }
+
+  &-outlined {
+    width: 300px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: blue;
+    border: 2px solid blue;
+    font-size: 18px;
+    font-weight: $bold;
+    transition: transform 0.133s ease-in-out;
   }
 }
 

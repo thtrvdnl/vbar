@@ -1,8 +1,8 @@
 <template>
   <div class="auth-wrapper">
-    <div class="auth-body" @submit.prevent="sendUserData">
+    <div class="auth-body">
       <h3 class="auth-title">Регистрация</h3>
-      <form @submit.prevent="" method="post" class="auth-form" autocomplete="on">
+      <form @submit.prevent="sendUserData" method="post" class="auth-form" autocomplete="on">
         <app-input
           v-for="input in inputsArr"
           :key="input.labelId"
@@ -11,9 +11,14 @@
           :labelId="input.labelId"
           :labelText="input.labelText"
           :dataPropName="input.dataPropName"
+          :isOutlined="true"
+          iconClass="before"
+          :icon="input.icon"
           @inputChange="inputChange"
         />
         <app-button :isDisabled="!isValidated" class="btn btn-send" type="submit">Зарегестрироваться</app-button>
+        <p class="divider">или</p>
+        <app-button class="btn btn-outlined" @click="redirectToLoginPage">Войти</app-button>
       </form>
     </div>
   </div>
@@ -51,27 +56,31 @@ export default {
           isRequired: true,
           inputType: 'email',
           labelText: 'Email',
-          labelId: getRandomHex(2 ** 10, 2 ** 32)
+          labelId: getRandomHex(2 ** 10, 2 ** 32),
+          icon: 'email'
         },
         {
           dataPropName: 'username',
           isRequired: true,
           labelText: 'Имя пользователя',
-          labelId: getRandomHex(2 ** 10, 2 ** 32)
+          labelId: getRandomHex(2 ** 10, 2 ** 32),
+          icon: 'account_circle'
         },
         {
           dataPropName: 'password',
           isRequired: true,
           inputType: 'password',
           labelText: 'Пароль',
-          labelId: getRandomHex(2 ** 10, 2 ** 32)
+          labelId: getRandomHex(2 ** 10, 2 ** 32),
+          icon: 'lock'
         },
         {
           dataPropName: 'repeatedPassword',
           isRequired: true,
           inputType: 'password',
           labelText: 'Повторите пароль',
-          labelId: getRandomHex(2 ** 10, 2 ** 32)
+          labelId: getRandomHex(2 ** 10, 2 ** 32),
+          icon: 'lock'
         }
       ]
     }
@@ -93,6 +102,7 @@ export default {
             console.log('You was registrated successfully, your data is:', data)
             this.email = this.password = this.repeatedPassword = this.username = ''
             this.isValidated = false
+            this.$router.push('/')
           } else {
             console.log('Something went wrong', data)
           }
@@ -112,67 +122,14 @@ export default {
         this.email.trim() && this.username.trim() && this.password === this.repeatedPassword && this.password.length > 7
           ? true
           : false
+    },
+    redirectToLoginPage() {
+      this.$router.push({ name: 'login' })
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../assets/vars';
-
-body {
-  background-color: $iconDark;
-}
-
-.auth {
-  &-wrapper {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &-body {
-    width: 100%;
-    height: 100vh;
-    background-color: $mainBg;
-    font-size: 20px;
-    padding: 15px 20px;
-  }
-  &-title {
-    font-size: 28px;
-    margin-bottom: 25px;
-    color: $textDark;
-    text-align: center;
-  }
-  &-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column nowrap;
-    text-align: center;
-  }
-}
-
-.input-wrapper {
-  margin-bottom: 30px;
-}
-
-@media screen and (min-width: $maxWidth) {
-  .auth {
-    &-body {
-      width: 500px;
-      height: 600px;
-      border-radius: $appBorderRadius;
-      box-shadow: 0 0 20px 0 $dark-25;
-      padding: 25px 35px;
-    }
-    &-title {
-      margin-bottom: 40px;
-    }
-  }
-  .input-wrapper {
-    margin-bottom: 40px;
-  }
-}
+@import '../assets/auth_page';
 </style>

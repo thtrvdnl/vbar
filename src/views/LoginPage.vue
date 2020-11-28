@@ -21,9 +21,9 @@
           ></app-input
         >
         <app-button class="btn btn-send" :isDisabled="!isValidated" type="submit">Войти</app-button>
-        <p @click="$router.push('/')" class="divider">или</p>
-        <app-button @click="redirectToRegisterPage" class="btn btn-outlined">Зарегестрироваться</app-button>
       </form>
+      <p @click="$router.push('/')" class="divider">или</p>
+      <app-button @click="redirectToRegisterPage" class="btn btn-outlined">Зарегестрироваться</app-button>
     </div>
   </div>
 </template>
@@ -35,14 +35,21 @@ import AppButton from '@/components/AppButton.vue'
 import { getRandomHex } from '@/utils'
 
 const URL = 'http://localhost:8000/auth/jwt/create/'
-function fetchConfig(bodyData) {
-  return {
-    method: 'POST',
+const URL_AUTH = 'http://localhost:8000/auth/users/me/'
+function fetchConfig(method, bodyData, jwtToken = null) {
+  const config = {
+    method,
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(bodyData)
+    }
   }
+  if (jwtToken) {
+    config.headers['Authorization'] = `JWT ${jwtToken}`
+  }
+  if (bodyData) {
+    config.body = JSON.stringify(bodyData)
+  }
+  return config
 }
 
 export default {
@@ -80,15 +87,25 @@ export default {
           password: this.password
         }
         try {
-          const response = await fetch(URL, fetchConfig(bodyData))
+          const response = await fetch(URL, fetchConfig('POST', bodyData))
           const data = await response.json()
 
-          console.log(data)
-          if (0) {
-            this.$router.push('/')
+          if (data.access) {
+            console.log(`Access Token is: ${data.access}, \n refresh token: ${data.refresh}`)
+            this.jwtAuth(data)
+          } else {
+            console.log('Something went wrong: ', data)
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(`Fetch error: ${error}`)
+        }
       }
+    },
+    async jwtAuth({ access }) {
+      const response = await fetch(URL_AUTH, fetchConfig('GET', null, access))
+      const data = await response.json()
+
+      console.log(data)
     },
     inputChange(str, dataPropName) {
       this[dataPropName] = str

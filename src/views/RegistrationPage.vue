@@ -17,9 +17,9 @@
           @inputChange="inputChange"
         />
         <app-button :isDisabled="!isValidated" class="btn btn-send" type="submit">Зарегестрироваться</app-button>
-        <p class="divider">или</p>
-        <app-button class="btn btn-outlined" @click="redirectToLoginPage">Войти</app-button>
       </form>
+      <p class="divider">или</p>
+      <app-button class="btn btn-outlined" @click="redirectToLoginPage">Войти</app-button>
     </div>
   </div>
 </template>

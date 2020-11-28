@@ -32,18 +32,18 @@
         </section>
       </div>
     </main>
-    <app-menu></app-menu>
+    <profile-menu></profile-menu>
   </div>
 </template>
 
 <script>
-import AppMenu from '@/components/AppMenu'
+import ProfileMenu from '@/components/ProfileMenu'
 import ProfileChip from '@/components/ProfileChip'
 import ProfileButton from '@/components/ProfileButton'
 import ProfileAvatar from '@/components/ProfileAvatar'
 
 export default {
-  components: { AppMenu, ProfileChip, ProfileButton, ProfileAvatar },
+  components: { ProfileMenu, ProfileChip, ProfileButton, ProfileAvatar },
   data() {
     return {
       titles: {

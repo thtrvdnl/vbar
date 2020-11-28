@@ -6,21 +6,23 @@
         <app-input
           v-for="input in inputsArr"
           :key="input.labelId"
-          :inputType="input.inputType"
+          :inputTypeProp="input.inputType"
           :isRequired="input.isRequired"
           :labelId="input.labelId"
           :labelText="input.labelText"
           :dataPropName="input.dataPropName"
           @inputChange="inputChange"
         />
-        <button :disabled="!isValidated" class="btn btn-send" type="submit">Зарегестрироваться</button>
+        <app-button :isDisabled="!isValidated" class="btn btn-send" type="submit">Зарегестрироваться</app-button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import AppInput from '../components/AppInput.vue'
+import AppInput from '@/components/AppInput.vue'
+import AppButton from '@/components/AppButton.vue'
+
 import { getRandomHex } from '@/utils'
 
 const URL = 'http://localhost:8000/auth/users/'
@@ -35,7 +37,7 @@ function fetchConfig(bodyData) {
 }
 
 export default {
-  components: { AppInput },
+  components: { AppInput, AppButton },
   data() {
     return {
       isValidated: false,
@@ -118,35 +120,6 @@ export default {
 
 body {
   background-color: $iconDark;
-}
-
-.btn {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-  height: 60px;
-  border: none;
-  padding: 15px;
-  color: $light-95;
-  margin-top: 40px;
-  box-shadow: 0 0 5px 0 $dark-35;
-  transition-property: background-color, box-shadow, opacity, width, height;
-  transition-duration: 0.133s;
-  transition-timing-function: ease-in-out;
-  border-radius: 50px;
-  font-size: 18px;
-  &-send {
-    background: blue;
-    &:hover {
-      background-color: green;
-    }
-    &:disabled {
-      background-color: gray;
-      cursor: not-allowed;
-    }
-  }
 }
 
 .auth {

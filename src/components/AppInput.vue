@@ -11,6 +11,18 @@
     />
     <div class="input-label-wrapper">
       <label class="input-label" :for="labelId">{{ labelText }}</label>
+      <i
+        v-if="inputTypeProp === 'password' && inputType === 'password'"
+        @click="inputType = 'text'"
+        class="input-icon material-icons-outlined"
+        >visibility</i
+      >
+      <i
+        v-if="inputTypeProp === 'password' && inputType !== 'password'"
+        @click="inputType = 'password'"
+        class="input-icon material-icons-outlined"
+        >visibility_off</i
+      >
     </div>
   </div>
 </template>
@@ -31,7 +43,7 @@ export default {
       type: String,
       default: 'Fill a field'
     },
-    inputType: {
+    inputTypeProp: {
       type: String,
       default: 'text'
     },
@@ -43,6 +55,11 @@ export default {
       type: String
     }
   },
+  data() {
+    return {
+      inputType: this.inputTypeProp
+    }
+  },
   methods: {
     inputChange(e) {
       this.$emit('input-change', e.target.value, this.dataPropName)
@@ -52,8 +69,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/vars';
 $inputHeight: 50px;
 $inputWidth: 300px;
+$inputTextPaddingTop: 12px;
 
 .input {
   font-size: 18px;
@@ -71,7 +90,7 @@ $inputWidth: 300px;
       width: $inputWidth;
     }
     position: absolute;
-    top: 12px;
+    top: $inputTextPaddingTop;
     left: 15px;
     font-size: 20px;
     margin-bottom: 5px;
@@ -90,6 +109,7 @@ $inputWidth: 300px;
     font-size: 20px;
     padding: 5px 15px;
     transition: border-bottom 0.2s ease-in-out;
+    border-radius: 0;
 
     &:not(:placeholder-shown) ~ .input-label-wrapper .input-label {
       top: -20px;
@@ -115,6 +135,15 @@ $inputWidth: 300px;
     &:focus:not(:placeholder-shown) ~ .input-label-wrapper .input-label {
       color: blue;
     }
+  }
+  &-icon {
+    color: $textDark;
+    position: absolute;
+    right: 10px;
+    top: $inputTextPaddingTop;
+    cursor: pointer;
+    user-select: none;
+    background-color: #fff;
   }
 }
 </style>

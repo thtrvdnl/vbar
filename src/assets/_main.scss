@@ -27,40 +27,6 @@
   align-items: center;
 }
 
-.btn {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border: none;
-  padding: 15px;
-  margin-right: 20px;
-  color: $light-95;
-  box-shadow: 0 0 5px 0 $dark-35;
-  transition-property: box-shadow, opacity, width, height;
-  transition-duration: 0.133s;
-  transition-timing-function: ease-in-out;
-
-  &:hover,
-  &:focus {
-    box-shadow: 0 2px 5px 1px $dark-35;
-  }
-
-  & > i {
-    font-size: $xlFontSize;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-
-  &-rounded {
-    border-radius: 50%;
-  }
-}
-
 .banner {
   position: relative;
   text-align: center;

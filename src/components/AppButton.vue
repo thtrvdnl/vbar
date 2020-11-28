@@ -40,8 +40,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
   border: none;
   padding: 15px;
   color: $light-95;
@@ -57,14 +55,6 @@ export default {
     transform: scale(0.99);
   }
 
-  & > i {
-    font-size: $xlFontSize;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-
   &:disabled {
     background-color: gray;
     cursor: not-allowed;
@@ -73,6 +63,18 @@ export default {
   &-rounded {
     border-radius: 50%;
     margin-right: 20px;
+    width: 60px;
+    height: 60px;
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      transform: none;
+    }
+    & > i {
+      font-size: $xlFontSize;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &-send {
@@ -81,6 +83,7 @@ export default {
     background-color: blue;
     font-size: 18px;
     transition: background-color 0.133s ease-in-out;
+    margin: 0;
     &:hover:not(.btn:disabled) {
       background-color: green;
     }
@@ -116,5 +119,25 @@ export default {
 #skip {
   background: #232526;
   background: linear-gradient(to right, #414345, #232526);
+}
+
+@media screen and (min-width: $maxWidth) {
+  .btn {
+    &-rounded {
+      width: 75px;
+      height: 75px;
+      margin-right: 30px;
+      box-shadow: 0 0 10px 0px $dark-35;
+      opacity: 0.87;
+      & > i {
+        font-size: $xxlFontSize;
+      }
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        box-shadow: 0 2px 15px 3px $dark-35;
+        opacity: 1;
+      }
+    }
+  }
 }
 </style>

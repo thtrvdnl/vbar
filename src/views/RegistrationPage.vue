@@ -116,6 +116,7 @@ export default {
     inputChange(str, dataPropName) {
       this[dataPropName] = str
       this.checkValidation()
+      console.log(this.isValidated)
     },
     checkValidation() {
       this.isValidated =

@@ -20,8 +20,8 @@
             >{{ input.icon }}</i
           ></app-input
         >
-        <app-button class="btn btn-send" :isDisabled="!isValidated">Войти</app-button>
-        <p class="divider">или</p>
+        <app-button class="btn btn-send" :isDisabled="!isValidated" type="submit">Войти</app-button>
+        <p @click="$router.push('/')" class="divider">или</p>
         <app-button @click="redirectToRegisterPage" class="btn btn-outlined">Зарегестрироваться</app-button>
       </form>
     </div>
@@ -33,6 +33,17 @@ import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 
 import { getRandomHex } from '@/utils'
+
+const URL = 'http://localhost:8000/auth/jwt/create/'
+function fetchConfig(bodyData) {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bodyData)
+  }
+}
 
 export default {
   components: { AppInput, AppButton },
@@ -61,10 +72,18 @@ export default {
     }
   },
   methods: {
-    sendUserData() {
+    async sendUserData() {
       this.checkValidation()
       if (this.isValidated) {
+        const bodyData = {
+          username: this.username,
+          password: this.password
+        }
         try {
+          const response = await fetch(URL, fetchConfig(bodyData))
+          const data = await response.json()
+
+          console.log(data)
           if (0) {
             this.$router.push('/')
           }

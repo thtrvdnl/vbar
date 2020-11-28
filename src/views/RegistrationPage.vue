@@ -90,7 +90,9 @@ export default {
           const data = await response.json()
 
           if (data.id) {
-            console.log(`You was registrated successfully, your data is: ${data}`)
+            console.log('You was registrated successfully, your data is:', data)
+            this.email = this.password = this.repeatedPassword = this.username = ''
+            this.isValidated = false
           } else {
             console.log('Something went wrong', data)
           }

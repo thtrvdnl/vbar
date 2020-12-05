@@ -30,17 +30,6 @@ import AppButton from '@/components/AppButton.vue'
 
 import { getRandomHex } from '@/utils'
 
-const URL = 'http://localhost:8000/auth/users/'
-function fetchConfig(bodyData) {
-  return {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(bodyData)
-  }
-}
-
 export default {
   components: { AppInput, AppButton },
   data() {
@@ -86,29 +75,17 @@ export default {
     }
   },
   methods: {
-    async sendUserData() {
+    sendUserData() {
       if (this.isValidated) {
-        const userData = {
-          email: this.email,
-          username: this.username,
-          password: this.password
-        }
+        this.$load(async () => {
+          const res = await this.$api.auth.signUp({
+            email: this.email,
+            username: this.username,
+            password: this.password
+          })
 
-        try {
-          const response = await fetch(URL, fetchConfig(userData))
-          const data = await response.json()
-
-          if (data.id) {
-            console.log('You was registrated successfully, your data is:', data)
-            this.email = this.password = this.repeatedPassword = this.username = ''
-            this.isValidated = false
-            this.$router.push('/')
-          } else {
-            console.log('Something went wrong', data)
-          }
-        } catch (error) {
-          console.log(`Fetch error: ${error}`)
-        }
+          console.log(res.data)
+        })
       } else {
         console.log('Incorrect inputs data')
       }
@@ -116,7 +93,6 @@ export default {
     inputChange(str, dataPropName) {
       this[dataPropName] = str
       this.checkValidation()
-      console.log(this.isValidated)
     },
     checkValidation() {
       this.isValidated =

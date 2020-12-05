@@ -34,24 +34,6 @@ import AppButton from '@/components/AppButton.vue'
 
 import { getRandomHex } from '@/utils'
 
-const URL = 'http://localhost:8000/auth/jwt/create/'
-const URL_AUTH = 'http://localhost:8000/auth/users/me/'
-function fetchConfig(method, bodyData, jwtToken = null) {
-  const config = {
-    method,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  if (jwtToken) {
-    config.headers['Authorization'] = `JWT ${jwtToken}`
-  }
-  if (bodyData) {
-    config.body = JSON.stringify(bodyData)
-  }
-  return config
-}
-
 export default {
   components: { AppInput, AppButton },
   data() {
@@ -82,30 +64,15 @@ export default {
     async sendUserData() {
       this.checkValidation()
       if (this.isValidated) {
-        const bodyData = {
+        const res = await this.$api.auth.getAccessToken({
           username: this.username,
           password: this.password
-        }
-        try {
-          const response = await fetch(URL, fetchConfig('POST', bodyData))
-          const data = await response.json()
+        })
 
-          if (data.access) {
-            console.log(`Access Token is: ${data.access}, \n refresh token: ${data.refresh}`)
-            this.jwtAuth(data)
-          } else {
-            console.log('Something went wrong: ', data)
-          }
-        } catch (error) {
-          console.log(`Fetch error: ${error}`)
-        }
+        console.log(res)
+      } else {
+        console.error('WRONG INPUTS')
       }
-    },
-    async jwtAuth({ access }) {
-      const response = await fetch(URL_AUTH, fetchConfig('GET', null, access))
-      const data = await response.json()
-
-      console.log(data)
     },
     inputChange(str, dataPropName) {
       this[dataPropName] = str

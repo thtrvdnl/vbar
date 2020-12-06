@@ -1,8 +1,5 @@
 export default function(instance) {
   return {
-    signIn(payload, jwtToken) {
-      return instance.post('auth/users/me/', payload, jwtToken)
-    },
     signUp(payload) {
       return instance.post('auth/users/', payload)
     },

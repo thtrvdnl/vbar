@@ -29,6 +29,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import signIn from '@/api/sign_in'
+
 import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 
@@ -61,15 +64,23 @@ export default {
     }
   },
   methods: {
-    async sendUserData() {
+    sendUserData() {
       this.checkValidation()
       if (this.isValidated) {
-        const res = await this.$api.auth.getAccessToken({
-          username: this.username,
-          password: this.password
-        })
+        this.$load(async () => {
+          const jwtResponse = await this.$api.auth.getAccessToken({
+            username: this.username,
+            password: this.password
+          })
 
-        console.log(res)
+          if (jwtResponse.status === 200 || jwtResponse.status === 201) {
+            this.$load(async () => {
+              const loginResponse = await signIn(jwtResponse.data.access)
+
+              console.log(loginResponse)
+            })
+          }
+        })
       } else {
         console.error('WRONG INPUTS')
       }

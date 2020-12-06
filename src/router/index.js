@@ -3,6 +3,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/profile/:username',
     name: 'profile-page',
     component: () => import('@/views/ProfilePage.vue')
   },

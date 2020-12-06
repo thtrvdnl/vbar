@@ -94,7 +94,10 @@ export default {
       this.$load(async () => {
         const res = await getWithJwt(accessToken, `api/profile/${id}`)
 
-        console.log(res.data)
+        if (res.status === 200 || res.status === 201) {
+          this.$router.push(`/profile/${res.data.username}`)
+          this.$store.dispatch('SET_USER_DATA', res.data)
+        }
       })
     },
     inputChange(str, dataPropName) {

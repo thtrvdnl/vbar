@@ -91,6 +91,11 @@
 .section {
   margin-bottom: $lFontSize;
 
+  &-actions {
+    position: sticky;
+    top: 10px;
+  }
+
   &:last-child {
     margin-bottom: 0;
   }

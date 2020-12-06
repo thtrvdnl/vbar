@@ -33,6 +33,9 @@ export default createStore({
   actions: {
     SET_COOKIE(_, { key, value }) {
       $cookies.set(key, value)
+    },
+    SET_USER_DATA({ state }, currentUserData) {
+      state.user = currentUserData
     }
   },
   getters: {}

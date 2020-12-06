@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
 import ProfileMenu from '@/components/ProfileMenu'
 import ProfileChip from '@/components/ProfileChip'
@@ -48,6 +48,9 @@ import ProfileAvatar from '@/components/ProfileAvatar'
 export default {
   components: { ProfileMenu, ProfileChip, AppButton, ProfileAvatar },
   computed: mapState(['user']),
+  mounted() {
+    console.log(this.user)
+  },
   data() {
     return {
       titles: {

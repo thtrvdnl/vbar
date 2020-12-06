@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios'
-import signIn from '@/api/sign_in'
+import getWithJwt from '@/api/get_with_jwt'
 
 import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
@@ -68,22 +68,35 @@ export default {
       this.checkValidation()
       if (this.isValidated) {
         this.$load(async () => {
-          const jwtResponse = await this.$api.auth.getAccessToken({
+          const res = await this.$api.auth.getAccessToken({
             username: this.username,
             password: this.password
           })
 
-          if (jwtResponse.status === 200 || jwtResponse.status === 201) {
-            this.$load(async () => {
-              const loginResponse = await signIn(jwtResponse.data.access)
-
-              console.log(loginResponse)
-            })
+          if (res.status === 200 || res.status === 201) {
+            this.getUserData(res.data)
           }
         })
       } else {
         console.error('WRONG INPUTS')
       }
+    },
+    getUserData({ access }) {
+      this.$load(async () => {
+        const res = await getWithJwt(access, 'auth/users/me/')
+
+        if (res.status === 200 || res.status === 201) {
+          this.getProfileData(access, res.data)
+          console.log(res.data)
+        }
+      })
+    },
+    getProfileData(accessToken, { id }) {
+      this.$load(async () => {
+        const res = await getWithJwt(accessToken, `api/profile/${id}`)
+
+        console.log(res.data)
+      })
     },
     inputChange(str, dataPropName) {
       this[dataPropName] = str

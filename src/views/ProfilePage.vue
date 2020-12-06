@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 import ProfileMenu from '@/components/ProfileMenu'
 import ProfileChip from '@/components/ProfileChip'
 import AppButton from '@/components/AppButton'
@@ -45,22 +47,13 @@ import ProfileAvatar from '@/components/ProfileAvatar'
 
 export default {
   components: { ProfileMenu, ProfileChip, AppButton, ProfileAvatar },
+  computed: mapState(['user']),
   data() {
     return {
       titles: {
         about: 'Обо мне:',
         interests: 'Интересы:',
         music: 'Я слушаю:'
-      },
-      user: {
-        name: 'Кидала',
-        age: 33,
-        imageLink:
-          'https://sun9-22.userapi.com/impf/vX8WjY7YpW-_ju0zJzIyKFARF8VUybaJqLGxIw/x8c8-vuseZg.jpg?size=960x960&quality=96&proxy=1&sign=d196759d085c6005493a8ff2814c07a7',
-        about:
-          'Повседневная практика показывает, что сложившаяся структура организации требует от нас системного анализа ключевых компонентов планируемого обновления. Задача организации, в особенности же реализация намеченного плана развития требует от нас системного анализа системы обучения кадров, соответствующей насущным потребностям! Значимость этих проблем настолько очевидна, что новая модель организационной деятельности создаёт предпосылки качественно новых шагов для системы масштабного изменения ряда параметров? Не следует, однако, забывать о том, что дальнейшее развитие различных форм деятельности в значительной степени обуславливает создание направлений прогрессивного развития?',
-        interests: ['Football', 'CS:GO', 'Sport', 'Cars', 'IT'],
-        music: ['LSP', 'Kanye West']
       },
       buttons: [
         {

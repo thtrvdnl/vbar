@@ -1,11 +1,13 @@
+import $cookies from 'vue-cookies'
+
 import { createStore } from 'vuex'
 import { saveStatePlugin } from '@/utils'
 
 const initialState = {
   user: {
-    avatar: 'https://sun1-89.userapi.com/c639119/v639119185/453f7/njy02C7tOgY.jpg',
-    name: 'Олег',
-    age: 19,
+    imageLink: 'https://sun1-89.userapi.com/c639119/v639119185/453f7/njy02C7tOgY.jpg',
+    name: 'Sergey',
+    age: 21,
     about: `Повседневная практика показывает, что сложившаяся структура организации требует от нас системного анализа
     ключевых компонентов планируемого обновления. Задача организации, в особенности же реализация намеченного
     плана развития требует от нас системного анализа системы обучения кадров, соответствующей насущным
@@ -14,15 +16,24 @@ const initialState = {
     однако, забывать о том, что дальнейшее развитие различных форм деятельности в значительной степени
     обуславливает создание направлений прогрессивного развития?`,
     interests: ['Football', 'CS:GO', 'Sport', 'Cars', 'IT'],
-    musics: ['LSP', 'Kanye West']
+    music: ['LSP', 'Kanye West']
   }
 }
 
-const currentState = JSON.parse(localStorage.getItem('state')) || initialState
+const localState = JSON.parse(localStorage.getItem('state'))
+if (!localState) {
+  localStorage.setItem('state', JSON.stringify(initialState))
+}
+
+const currentState = JSON.parse(localStorage.getItem('state'))
 
 export default createStore({
   plugins: [saveStatePlugin],
   state: currentState,
-  mutations: {},
+  actions: {
+    SET_COOKIE(_, { key, value }) {
+      $cookies.set(key, value)
+    }
+  },
   getters: {}
 })

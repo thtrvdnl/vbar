@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import getWithJwt from '@/api/get_with_jwt'
 
 import AppInput from '@/components/AppInput.vue'
@@ -74,6 +73,7 @@ export default {
           })
 
           if (res.status === 200 || res.status === 201) {
+            this.$store.dispatch('SET_COOKIE', { key: 'access_token', value: res.data.access })
             this.getUserData(res.data)
           }
         })
@@ -87,7 +87,6 @@ export default {
 
         if (res.status === 200 || res.status === 201) {
           this.getProfileData(access, res.data)
-          console.log(res.data)
         }
       })
     },
@@ -103,7 +102,7 @@ export default {
       this.checkValidation()
     },
     checkValidation() {
-      this.isValidated = this.username.trim() && this.password.trim().length > 7 ? true : false
+      this.isValidated = !!(this.username.trim() && this.password.trim()?.length > 7)
     },
     redirectToRegisterPage() {
       this.$router.push({ name: 'registration' })

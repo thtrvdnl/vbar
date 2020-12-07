@@ -1,19 +1,17 @@
-# vbar-test
+# Клиент VBAR
 
-## Project setup
+## Для установки зависимостей
+
 ```
+npm install
+или
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Для запуска в режиме разработки
+
 ```
+npm serve
+или
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

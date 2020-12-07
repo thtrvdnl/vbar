@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import $cookies from 'vue-cookies'
+
 const routes = [
   {
     path: '/',
@@ -7,8 +9,15 @@ const routes = [
   },
   {
     path: '/profile/:username',
-    name: 'profile-page',
-    component: () => import('@/views/ProfilePage.vue')
+    name: 'profile',
+    component: () => import('@/views/ProfilePage.vue'),
+    beforeEnter: (to, _, next) => {
+      if (to.name === 'profile' && !!$cookies.get('accept_token')) {
+        next()
+      } else {
+        next({ name: 'login' })
+      }
+    }
   },
   {
     path: '/registration',

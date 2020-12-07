@@ -40,6 +40,7 @@ export default {
   components: { AppInput, AppButton },
   data() {
     return {
+      isLoading: false,
       username: '',
       password: '',
       isValidated: false,
@@ -66,6 +67,7 @@ export default {
     sendUserData() {
       this.checkValidation()
       if (this.isValidated) {
+        this.isLoading = true
         this.$load(async () => {
           const res = await this.$api.auth.getAccessToken({
             username: this.username,
@@ -82,15 +84,18 @@ export default {
       }
     },
     getUserData({ access }) {
+      this.isLoading = true
       this.$load(async () => {
         const res = await getWithJwt(access, 'auth/users/me/')
 
         if (res.status === 200 || res.status === 201) {
           this.getProfileData(access, res.data)
         }
+        this.isLoading = false
       })
     },
     getProfileData(accessToken, { id }) {
+      this.isLoading = true
       this.$load(async () => {
         const res = await getWithJwt(accessToken, `api/profile/${id}`)
 
@@ -98,6 +103,7 @@ export default {
           this.$router.push(`/profile/${res.data.username}`)
           this.$store.dispatch('SET_USER_DATA', res.data)
         }
+        this.isLoading = false
       })
     },
     inputChange(str, dataPropName) {
@@ -105,7 +111,7 @@ export default {
       this.checkValidation()
     },
     checkValidation() {
-      this.isValidated = !!(this.username.trim() && this.password.trim()?.length > 7)
+      this.isValidated = this.username.trim() && this.password.trim()?.length > 7
     },
     redirectToRegisterPage() {
       this.$router.push({ name: 'registration' })

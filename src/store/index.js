@@ -29,13 +29,21 @@ const currentState = JSON.parse(localStorage.getItem('state'))
 
 export default createStore({
   plugins: [saveStatePlugin],
-  state: currentState,
-  actions: {
+  state: {
+    isAuthorized: false,
+    ...currentState
+  },
+  mutations: {
     SET_COOKIE(_, { key, value }) {
       $cookies.set(key, value)
     },
     SET_USER_DATA({ state }, currentUserData) {
-      state.user = currentUserData
+      const accessToken = $cookies.get('access_token')
+
+      if (accessToken) {
+        state.user = currentUserData
+        state.isAuthorized = true
+      }
     }
   },
   getters: {}

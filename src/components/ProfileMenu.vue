@@ -14,7 +14,9 @@
         <a class="menu-link" href="/liked"><i class="material-icons-outlined">thumb_up</i></a>
       </li>
       <li class="menu-item">
-        <a class="menu-link" href="/settings"><i class="material-icons-outlined">settings</i></a>
+        <router-link class="menu-link" :to="{ name: 'profile-edit' }"
+          ><i class="material-icons-outlined">settings</i></router-link
+        >
       </li>
     </ul>
   </nav>

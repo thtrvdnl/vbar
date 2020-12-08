@@ -1,14 +1,16 @@
 <template>
   <div class="input-wrapper">
     <input
-      :inputValue="inputValue"
-      @input="$emit('input', $event.target.value)"
-      placeholder=" "
+      :placeholder="placeholder"
       class="input-field"
+      autocomplete="on"
+      :inputValue="inputValue"
       :required="isRequired"
       :id="labelId"
       :type="inputType"
-      autocomplete="on"
+      :disabled="isDisabled"
+      :value="inputValue"
+      @input="$emit('input', $event.target.value)"
     />
     <div class="input-label-wrapper">
       <label class="input-label" :for="labelId">{{ labelText }}</label>
@@ -27,6 +29,7 @@
     </div>
     <i
       :class="`input-icon ${iconClass ? 'input-icon-' + iconClass : ''} material-icons${isOutlined ? '-outlined' : ''}`"
+      @click="onIconClick"
       >{{ icon }}</i
     >
   </div>
@@ -69,6 +72,17 @@ export default {
     },
     inputValue: {
       type: String
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: ' '
+    },
+    dataPropName: {
+      type: String
     }
   },
   model: {
@@ -77,7 +91,14 @@ export default {
   },
   data() {
     return {
-      inputType: this.inputTypeProp
+      inputType: this.inputTypeProp,
+      isDisabled: this.disabled
+    }
+  },
+  methods: {
+    onIconClick() {
+      this.$emit('icon-click', this.dataPropName)
+      this.isDisabled = !this.isDisabled
     }
   }
 }
@@ -85,11 +106,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/vars';
-$inputHeight: 50px;
-$inputWidth: 320px;
-$inputTextPaddingTop: 12px;
-$inputIconPaddingSide: 10px;
-$labelPaddingLeft: 40px;
 
 .input {
   font-size: 16px;
@@ -100,7 +116,7 @@ $labelPaddingLeft: 40px;
     flex-flow: column-reverse nowrap;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: $inputWidth;
   }
   &-label {
     &-wrapper {
@@ -129,6 +145,11 @@ $labelPaddingLeft: 40px;
     padding: 5px $labelPaddingLeft;
     transition: border-bottom 0.2s ease-in-out;
     border-radius: 0;
+
+    &:disabled ~ .input-label-wrapper .input-label {
+      font-weight: $bold;
+      color: $textDark;
+    }
 
     &:not(:placeholder-shown) ~ .input-label-wrapper .input-label {
       top: -20px;
@@ -176,6 +197,23 @@ $labelPaddingLeft: 40px;
     }
     &-before {
       left: $inputIconPaddingSide;
+    }
+    &-after-out {
+      right: -48px;
+      top: 4px;
+      background: transparent;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition-property: background-color, transform;
+      transition-duration: 0.133s;
+      transition-timing-function: ease;
+      transform: scale(1);
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+        background-color: rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

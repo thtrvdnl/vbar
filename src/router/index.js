@@ -5,6 +5,14 @@ import store from '@/store'
 
 Vue.use(VueRouter)
 
+const beforeEnterGuard = (to, _, next) => {
+  if (store.getters['AUTH_STATUS']) {
+    next()
+  } else {
+    next({ name: 'login' })
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -14,13 +22,13 @@ const routes = [
     path: '/profile/:username',
     name: 'profile',
     component: () => import('@/views/ProfilePage.vue'),
-    beforeEnter: (to, _, next) => {
-      if (to.name === 'profile' && store.getters['AUTH_STATUS']) {
-        next()
-      } else {
-        next({ name: 'login' })
-      }
-    }
+    beforeEnter: beforeEnterGuard
+  },
+  {
+    path: '/profile/:username/edit',
+    name: 'profile-edit',
+    component: () => import('@/views/EditProfilePage.vue'),
+    beforeEnter: beforeEnterGuard
   },
   {
     path: '/registration',

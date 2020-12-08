@@ -82,28 +82,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '../assets/fonts';
-@import '../assets/reset';
-@import '../assets/vars';
-@import '../assets/main';
-
-body {
-  background-color: $iconDark;
-}
-
-.wrapper {
-  position: relative;
-  background-color: $mainBg;
-  min-width: $minWidth;
-  min-height: $defHeight;
-  max-width: $maxWidth;
-  margin: 0 auto;
-  padding: 0 0 30px 0;
-  box-shadow: 0 0 15px 3px $dark-25;
-}
-
-// @media
-@import '../assets/not_mobile';
-</style>

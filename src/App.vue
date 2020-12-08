@@ -14,6 +14,11 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+@import './assets/fonts';
+@import './assets/reset';
+@import './assets/vars';
+@import './assets/main';
+@import './assets/wrapper';
 
 * {
   margin: 0;
@@ -37,4 +42,7 @@ a {
   }
   text-decoration: none;
 }
+
+// @media
+@import './assets/not_mobile';
 </style>

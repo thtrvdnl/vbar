@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { saveStatePlugin } from '@/utils'
+import { saveStatePlugin, toCamel } from '@/utils'
 import $cookies from 'vue-cookies'
 
 Vue.use(Vuex)
@@ -44,7 +44,9 @@ export default new Vuex.Store({
       const accessToken = $cookies.get('access_token')
 
       if (accessToken) {
-        state.user = currentUserData
+        const dataToSet = {}
+        Object.entries(currentUserData).forEach(entry => (dataToSet[toCamel(entry[0])] = entry[1]))
+        state.user = dataToSet
         state.isAuthorized = true
       }
     }

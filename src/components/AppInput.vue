@@ -97,7 +97,9 @@ export default {
   },
   methods: {
     onIconClick() {
-      this.$emit('icon-click', this.dataPropName)
+      if (this.isDisabled) {
+        this.$emit('icon-click', this.dataPropName)
+      }
       this.isDisabled = !this.isDisabled
     }
   }

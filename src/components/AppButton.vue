@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'app-button',
   props: {
     isDisabled: {
       type: Boolean,

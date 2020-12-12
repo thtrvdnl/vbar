@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'profile-avatar',
   props: {
     imageLink: {
       type: String,

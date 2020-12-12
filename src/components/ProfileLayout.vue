@@ -9,6 +9,7 @@
 import ProfileMenu from '@/components/ProfileMenu.vue'
 
 export default {
+  name: 'profile-layout',
   components: { ProfileMenu }
 }
 </script>

@@ -31,38 +31,18 @@
 <script>
 import getWithJwt from '@/api/get_with_jwt'
 
+import AuthMixin from '@/mixins/AuthMixin'
 import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 
 import { getRandomHex } from '@/utils'
 
 export default {
+  name: 'login-page',
+  mixins: [AuthMixin],
   components: { AppInput, AppButton },
   data() {
-    return {
-      isValidated: false,
-      user: {
-        username: '',
-        password: ''
-      },
-      inputsArr: [
-        {
-          dataPropName: 'username',
-          isRequired: true,
-          labelText: 'Имя пользователя',
-          labelId: getRandomHex(2 ** 10, 2 ** 32),
-          icon: 'account_circle'
-        },
-        {
-          dataPropName: 'password',
-          isRequired: true,
-          inputType: 'password',
-          labelText: 'Пароль',
-          labelId: getRandomHex(2 ** 10, 2 ** 32),
-          icon: 'lock'
-        }
-      ]
-    }
+    return {}
   },
   methods: {
     sendUserData() {

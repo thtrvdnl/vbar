@@ -1,13 +1,14 @@
 <template>
   <div class="input-wrapper">
     <input
-      :placeholder="placeholder"
       class="input-field"
-      autocomplete="on"
+      :placeholder="ph"
+      :autocomplete="autocomplete ? inputType : autocomplete"
+      :name="inputType"
+      :type="inputType"
       :inputValue="inputValue"
       :required="isRequired"
       :id="labelId"
-      :type="inputType"
       :disabled="isDisabled"
       :value="inputValue"
       @input="$emit('input', $event.target.value)"
@@ -39,13 +40,12 @@
 import { getRandomHex } from '@/utils'
 
 export default {
+  name: 'app-input',
   props: {
+    autocomplete: Boolean,
     labelId: {
       type: String,
-      default: () => {
-        const rndHex = getRandomHex(0, 2 ** 32)
-        return `id-${rndHex}`
-      }
+      default: () => `id-${getRandomHex(0, 2 ** 32)}`
     },
     labelText: {
       type: String,
@@ -59,9 +59,7 @@ export default {
       type: Boolean,
       default: false
     },
-    icon: {
-      type: String
-    },
+    icon: String,
     isOutlined: {
       type: Boolean,
       default: false
@@ -70,9 +68,7 @@ export default {
       type: String,
       default: 'input-icon'
     },
-    inputValue: {
-      type: String
-    },
+    inputValue: String,
     disabled: {
       type: Boolean,
       default: false
@@ -81,9 +77,7 @@ export default {
       type: String,
       default: ' '
     },
-    dataPropName: {
-      type: String
-    }
+    dataPropName: String
   },
   model: {
     prop: 'inputValue',
@@ -92,7 +86,8 @@ export default {
   data() {
     return {
       inputType: this.inputTypeProp,
-      isDisabled: this.disabled
+      isDisabled: this.disabled,
+      ph: this.placeholder
     }
   },
   methods: {
@@ -192,7 +187,7 @@ export default {
     top: $inputTextPaddingTop;
     color: $textDark;
     user-select: none;
-    background-color: #fff;
+    background-color: transparent;
     &-password {
       right: $inputIconPaddingSide;
       cursor: pointer;

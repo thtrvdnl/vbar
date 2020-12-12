@@ -28,6 +28,7 @@ import ProfileLayout from '@/components/ProfileLayout.vue'
 import { getRandomHex } from '@/utils'
 
 export default {
+  name: 'edit-profile-page',
   components: { ProfileLayout, AppInput, AppButton },
   data() {
     const currentUser = this.$store.state.user

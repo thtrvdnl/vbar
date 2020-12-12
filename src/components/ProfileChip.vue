@@ -8,6 +8,7 @@
 import { getRandomColor } from '@/utils'
 
 export default {
+  name: 'profile-chip',
   props: {
     chipText: {
       type: String,

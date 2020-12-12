@@ -1,4 +1,10 @@
 import axios from 'axios'
-import initialConfig from './initial_config'
 
-export default axios.create(initialConfig)
+const instance = {
+  baseURL: 'http://localhost:8000/',
+  headers: {
+    accept: 'application/json'
+  }
+}
+
+export default axios.create(instance)

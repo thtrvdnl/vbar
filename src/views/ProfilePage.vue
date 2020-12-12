@@ -46,6 +46,7 @@ import AppButton from '@/components/AppButton'
 import ProfileAvatar from '@/components/ProfileAvatar'
 
 export default {
+  name: 'profile-page',
   components: { ProfileMenu, ProfileChip, AppButton, ProfileAvatar },
   computed: mapState(['user']),
   mounted() {

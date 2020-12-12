@@ -21,3 +21,5 @@ export const toCamel = s =>
       .replace('-', '')
       .replace('_', '')
   )
+
+export const toSnake = s => s.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`)

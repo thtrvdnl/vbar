@@ -2,7 +2,7 @@
   <div class="auth-wrapper">
     <div class="auth-body">
       <h3 class="auth-title">Регистрация</h3>
-      <form @submit.prevent="sendUserData" method="post" class="auth-form" autocomplete="on">
+      <form @submit.prevent="sendUserData" method="post" class="auth-form">
         <app-input
           v-for="input in inputsArr"
           :key="input.labelId"
@@ -11,6 +11,7 @@
           :labelId="input.labelId"
           :labelText="input.labelText"
           :isOutlined="true"
+          :autocomplete="false"
           iconClass="before"
           :icon="input.icon"
           @input="isValid"
@@ -31,6 +32,7 @@ import AppButton from '@/components/AppButton.vue'
 import { getRandomHex } from '@/utils'
 
 export default {
+  name: 'registration-page',
   components: { AppInput, AppButton },
   data() {
     return {

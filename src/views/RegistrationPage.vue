@@ -2,7 +2,7 @@
   <div class="auth-wrapper">
     <div class="auth-body">
       <h3 class="auth-title">Регистрация</h3>
-      <form @submit.prevent="sendUserData" method="post" class="auth-form">
+      <form @submit.prevent="sendUserData" method="post" class="auth-form" autocomplete="off">
         <app-input
           v-for="input in inputsArr"
           :key="input.labelId"

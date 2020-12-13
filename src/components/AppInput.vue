@@ -2,8 +2,7 @@
   <div class="input-wrapper">
     <input
       class="input-field"
-      :placeholder="ph"
-      :autocomplete="autocomplete ? inputType : autocomplete"
+      :placeholder="placeholder"
       :name="inputType"
       :type="inputType"
       :inputValue="inputValue"
@@ -42,7 +41,6 @@ import { getRandomHex } from '@/utils'
 export default {
   name: 'app-input',
   props: {
-    autocomplete: Boolean,
     labelId: {
       type: String,
       default: () => `id-${getRandomHex(0, 2 ** 32)}`
@@ -86,8 +84,7 @@ export default {
   data() {
     return {
       inputType: this.inputTypeProp,
-      isDisabled: this.disabled,
-      ph: this.placeholder
+      isDisabled: this.disabled
     }
   },
   methods: {

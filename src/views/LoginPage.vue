@@ -2,7 +2,7 @@
   <div class="auth-wrapper">
     <div class="auth-body">
       <h3 class="auth-title">Авторизация</h3>
-      <form @submit.prevent="sendUserData" method="post" class="auth-form" autocomplete="on">
+      <form @submit.prevent="signIn" method="post" class="auth-form">
         <app-input
           v-for="input in inputsArr"
           :key="input.labelId"
@@ -11,6 +11,7 @@
           :labelText="input.labelText"
           :icon="input.icon"
           :isOutlined="true"
+          :autocomplete="true"
           iconClass="before"
           @input="isValid"
           v-model="user[input.dataPropName]"
@@ -22,7 +23,7 @@
         >
         <app-button class="btn btn-send" :isDisabled="!isValidated" type="submit">Войти</app-button>
       </form>
-      <p @click="$router.push('/')" class="divider">Еще не зарегестрированы?</p>
+      <p class="divider">Еще не зарегестрированы?</p>
       <app-button @click="redirectToRegisterPage" class="btn btn-outlined">Зарегестрироваться</app-button>
     </div>
   </div>
@@ -32,8 +33,8 @@
 import getWithJwt from '@/api/get_with_jwt'
 
 import AuthMixin from '@/mixins/AuthMixin'
-import AppInput from '@/components/AppInput.vue'
-import AppButton from '@/components/AppButton.vue'
+import AppInput from '@/components/AppInput'
+import AppButton from '@/components/AppButton'
 
 import { getRandomHex } from '@/utils'
 
@@ -45,45 +46,19 @@ export default {
     return {}
   },
   methods: {
-    sendUserData() {
+    async signIn() {
       if (this.isValid()) {
-        this.$load(async () => {
-          const res = await this.$api.auth.getAccessToken({
-            username: this.user.username,
-            password: this.user.password
-          })
-
-          if (res.status === 200 || res.status === 201) {
-            this.$store.commit('SET_COOKIE', { key: 'access_token', value: res.data.access })
-            this.getUserData(res.data)
-          }
+        const username = await this.$store.dispatch('SEND_USER_DATA', {
+          username: this.user.username,
+          password: this.user.password
         })
+
+        if (username) {
+          this.$router.push({ name: 'profile', params: { username } })
+        }
       } else {
         console.error('WRONG INPUTS')
       }
-    },
-    getUserData({ access }) {
-      this.$load(async () => {
-        const res = await getWithJwt(access, 'auth/users/me/')
-
-        if (res.status === 200 || res.status === 201) {
-          this.getProfileData(access, res.data)
-        }
-      })
-    },
-    getProfileData(accessToken, { id }) {
-      this.$load(async () => {
-        const res = await getWithJwt(accessToken, `api/profile/${id}`)
-
-        if (res.status === 200 || res.status === 201) {
-          this.$store.commit('SET_USER_DATA', res.data)
-          if (res.data.username) {
-            this.$router.push(`/profile/${res.data.username}`)
-          } else {
-            console.error('Wrong data: ', res)
-          }
-        }
-      })
     },
     isValid() {
       this.isValidated = this.user.username.trim() && this.user.password.trim()?.length > 7

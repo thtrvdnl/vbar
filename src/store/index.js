@@ -17,6 +17,7 @@ if (!localState) {
 const currentState = JSON.parse(localStorage.getItem('state'))
 
 export default new Vuex.Store({
+  namespaced: true,
   plugins: [saveStatePlugin],
   state: {
     isAuthorized: false,

@@ -6,9 +6,7 @@ export default {
     $cookies.set(key, value)
   },
   SET_USER_DATA(state, currentUserData) {
-    const accessToken = $cookies.get('access_token')
-
-    if (accessToken) {
+    if ($cookies.get('access_token')) {
       const dataToSet = {}
       Object.entries(currentUserData).forEach(entry => (dataToSet[toCamel(entry[0])] = entry[1]))
       state.user = dataToSet

@@ -5,7 +5,6 @@ import store from '@/store'
 
 import VueCookies from 'vue-cookies'
 import VueProgressBar from 'vue-progressbar'
-import LoadPlugin from '@/plugins/load'
 import ApiPlugin from '@/plugins/api'
 
 const options = {
@@ -23,7 +22,6 @@ const options = {
 
 Vue.use(VueCookies)
 Vue.use(VueProgressBar, options)
-Vue.use(LoadPlugin)
 Vue.use(ApiPlugin)
 
 Vue.config.productionTip = false

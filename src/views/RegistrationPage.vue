@@ -81,18 +81,15 @@ export default {
   methods: {
     sendUserData() {
       if (this.isValid()) {
-        this.$load(async () => {
-          const res = await this.$api.auth.signUp({
-            email: this.user.email,
-            username: this.user.username,
-            password: this.user.password
-          })
-
-          if (res.status === 201 || res.status === 200) {
-            this.$router.push({ name: 'login' })
-          }
-          console.log(res.data)
+        const { id: uid } = this.$store.dispatch('SIGN_UP', {
+          email: this.user.email,
+          username: this.user.username,
+          password: this.user.password
         })
+
+        if (uid) {
+          this.$router.push({ name: 'login' })
+        }
       } else {
         console.log('Incorrect inputs data')
       }

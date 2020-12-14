@@ -10,7 +10,7 @@
       :id="labelId"
       :disabled="isDisabled"
       :value="inputValue"
-      @input="$emit('input', $event.target.value)"
+      @input="onInput"
     />
     <div class="input-label-wrapper">
       <label class="input-label" :for="labelId">{{ labelText }}</label>
@@ -93,6 +93,13 @@ export default {
         this.$emit('icon-click', this.dataPropName)
       }
       this.isDisabled = !this.isDisabled
+    },
+    onInput(e) {
+      if (this.dataPropName) {
+        this.$emit('input', e.target.value, this.dataPropName)
+      } else {
+        this.$emit('input', e.target.value)
+      }
     }
   }
 }

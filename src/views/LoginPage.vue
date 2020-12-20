@@ -43,7 +43,13 @@ export default {
   mixins: [AuthMixin],
   components: { AppInput, AppButton },
   data() {
-    return {}
+    return {
+      user: {
+        username: '',
+        password: ''
+      },
+      isValidated: false
+    }
   },
   methods: {
     async signIn() {

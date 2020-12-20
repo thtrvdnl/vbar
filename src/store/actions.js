@@ -48,17 +48,17 @@ export default {
   },
   SEND_USER_DATA({ commit }, payload) {
     return $load(async () => {
-      const { status, data: tokens } = await $api.auth.getAccessToken(payload)
+      const { status, data: token } = await $api.auth.getAccessToken(payload)
 
       if (status === 200 || status === 201) {
-        commit('SET_COOKIE', { key: 'access_token', value: tokens.access })
-        return this.dispatch('GET_USER_DATA', tokens.access)
+        commit('SET_COOKIE', { key: 'access_token', value: token.access })
+        return this.dispatch('GET_USER_DATA', token.access)
       }
     })
   },
   GET_USER_DATA({ commit }, accessToken) {
     return $load(async () => {
-      const { status, data } = await getWithJwt(accessToken, 'auth/users/me/')
+      const { status, data } = await $api.auth.getWithJwt(accessToken)
 
       if (status === 200 || status === 201) {
         return this.dispatch('GET_PROFILE_DATA', { accessToken, uid: data.id })
@@ -67,7 +67,7 @@ export default {
   },
   GET_PROFILE_DATA({ commit }, { accessToken, uid }) {
     return $load(async () => {
-      const { status, data: user } = await getWithJwt(accessToken, `api/profile/${uid}`)
+      const { status, data: user } = await $api.auth.getProfileData(uid, accessToken)
 
       if (status === 200 || status === 201) {
         commit('SET_USER_DATA', user)

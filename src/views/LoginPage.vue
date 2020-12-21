@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import getWithJwt from '@/api/get_with_jwt'
-
 import AuthMixin from '@/mixins/AuthMixin'
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'

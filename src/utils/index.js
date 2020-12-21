@@ -23,3 +23,20 @@ export const toCamel = s =>
   )
 
 export const toSnake = s => s.replace(/[A-Z]/g, l => `_${l.toLowerCase()}`)
+
+export const keysToSnake = obj => {
+  const result = {}
+  Object.keys(obj).forEach(k => (result[toSnake(k)] = obj[k]))
+  return result
+}
+
+export const convertKeys = (obj, callback) => {
+  const result = {}
+  Object.keys(obj).forEach(k => (result[callback(k)] = obj[k]))
+  return result
+}
+
+export const addJwt = (instance, accessToken) => {
+  instance.defaults.headers.common['Authorization'] = `JWT ${accessToken}`
+  return instance
+}

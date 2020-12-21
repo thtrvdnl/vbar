@@ -1,11 +1,11 @@
 <template>
   <div class="banner">
-    <img :src="imageLink" :alt="userName" class="banner-img" />
+    <img :src="avatar" :alt="firstName" class="banner-img" />
     <div class="avatar-wrapper">
-      <img :src="imageLink" :alt="userName" class="avatar" />
+      <img :src="avatar" :alt="firstName" class="avatar" />
       <div class="person-wrapper">
-        <h2 class="person-name">&nbsp;{{ userName }}</h2>
-        <span v-if="userAge" class="person-age">, {{ userAge }}</span>
+        <h2 class="person-name">&nbsp;{{ firstName }}</h2>
+        <span v-if="age" class="person-age">, {{ age }}</span>
       </div>
     </div>
   </div>
@@ -15,15 +15,15 @@
 export default {
   name: 'profile-avatar',
   props: {
-    imageLink: {
+    avatar: {
       type: String,
       default: 'https://image.flaticon.com/icons/png/512/104/104784.png'
     },
-    userName: {
+    firstName: {
       type: String,
       default: 'username'
     },
-    userAge: {
+    age: {
       type: Number
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <main class="main">
-      <profile-avatar :imageLink="user.imageLink" :userName="user.name" :userAge="user.age"></profile-avatar>
+      <profile-avatar :firstName="user.firstName" :age="user.age"></profile-avatar>
       <div class="main-body">
         <section class="section section-actions">
           <div class="buttons-wrapper">

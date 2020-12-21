@@ -11,11 +11,19 @@ const instance = axios.create({
 instance.interceptors.request.use(config => {
   NProgress.start()
   return config
-})
+}, onError)
+
+instance.interceptors.response.eject
 
 instance.interceptors.response.use(response => {
   NProgress.done()
   return response
-})
+}, onError)
+
+function onError(error) {
+  document.querySelector('#nprogress .bar').style.background = 'red'
+  NProgress.done()
+  return Promise.reject(error)
+}
 
 export default instance

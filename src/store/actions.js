@@ -1,40 +1,26 @@
 import $load from '@/plugins/load'
 import $api from '@/api/index'
+import { convertKeys, toCamel, toSnake } from '@/utils'
 import $cookies from 'vue-cookies'
-import getWithJwt from '@/api/get_with_jwt'
-import { updateProfle } from '@/api/update_data'
-import { toSnake } from '@/utils'
-
-import axios from 'axios'
 
 export default {
-  SET_COOKIE({ commit }, payload) {
-    commit('SET_COOKIE', payload)
-  },
-  SET_USER_DATA({ commit }, payload) {
-    commit('SET_USER_DATA', payload)
-  },
-  UPDATE_PROFILE({ commit, getters }, payload) {
-    // return $load(async () => {
-    //   const jwtToken = $cookies.get('access_token')
-    //   if (jwtToken) {
-    //     const snakePayload = {}
-    //     Object.entries(payload).forEach(e => (snakePayload[toSnake(e[0])] = e[1]))
-    //     const res = await updateProfle(jwtToken, getters['USER_ID'], snakePayload)
-    //     return res
-    //   }
-    //   return null
-    // })
-    const jwtToken = $cookies.get('access_token')
-    const snakePayload = {}
-    Object.entries(payload).forEach(e => (snakePayload[toSnake(e[0])] = e[1]))
-    return axios.put(`http://localhost:8000/api/profile/${getters['USER_ID']}/`, {
-      method: 'PUT',
-      headers: {
-        accept: 'application/json',
-        Authorization: `JWT ${jwtToken}`
-      },
-      body: snakePayload
+  UPDATE_PROFILE({ state, commit }, newUserData) {
+    return $load(async () => {
+      newUserData = { ...state.user, ...newUserData }
+      delete newUserData.avatar
+
+      const { status, data } = await $api.profile.updateData(
+        $cookies.get('access_token'),
+        convertKeys(newUserData, toSnake)
+      )
+
+      if (status === 200 || status === 201) {
+        const result = convertKeys(data, toCamel)
+        console.log(result)
+        commit('UPDATE_PROFILE', result)
+        return result
+      }
+      return null
     })
   },
   SIGN_UP({ commit }, payload) {

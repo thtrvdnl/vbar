@@ -6,6 +6,7 @@
         <form @submit.prevent="onSubmit" class="main-form">
           <app-input
             v-for="input of inputArr"
+            placeholder=""
             :key="input.dataPropName"
             :labelText="input.labelText"
             :inputValue="input.inputValue"
@@ -14,11 +15,18 @@
             @icon-click="onIconClick"
           ></app-input>
           <div class="checkboxes-wrapper">
-            <h3 class="checkboxes-title">Beer grades</h3>
-            <app-checkbox>Dark</app-checkbox>
+            <h3 class="checkboxes-title">Сорта пива</h3>
+            <app-checkbox
+              v-for="beerGrade in beerGradesArr"
+              :key="beerGrade.value"
+              :checked="beerGrade.checked"
+              :value="beerGrade.value"
+              @change="onCheckboxChange"
+              >{{ beerGrade.value }}</app-checkbox
+            >
           </div>
           <div class="btns-wrapper">
-            <app-button type="submit" class="btn btn-send">Сохранить</app-button>
+            <app-button type="submit" class="btn btn-send" @change="onCheckboxChange">Сохранить</app-button>
           </div>
         </form>
       </div>
@@ -27,7 +35,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import AppButton from '@/components/AppButton.vue'
 import AppInput from '@/components/AppInput.vue'
 import AppCheckbox from '@/components/AppCheckbox.vue'
@@ -39,49 +47,51 @@ export default {
   name: 'edit-profile-page',
   components: { ProfileLayout, AppInput, AppButton, AppCheckbox },
   computed: {
-    ...mapState({
-      // currentUser: state => state.user
-    })
-  },
-  data() {
-    return {
-      newUserData: {},
-      inputArr: [
+    ...mapGetters({
+      currentUser: 'USER'
+    }),
+    inputArr() {
+      return [
         {
           dataPropName: 'email',
           labelText: 'Email',
-          inputValue: this.$store.state.user.email,
+          inputValue: this.currentUser.email,
           inputTypeProp: 'email',
           isRequired: true
         },
         {
           dataPropName: 'username',
           labelText: 'Имя пользователя',
-          inputValue: this.$store.state.user.username,
+          inputValue: this.currentUser.username,
           inputTypeProp: 'text',
           isRequired: true
         },
         {
           dataPropName: 'phone',
           labelText: 'Номер телефона',
-          inputValue: this.$store.state.user.phone,
+          inputValue: this.currentUser.phone,
           inputTypeProp: 'tel'
         },
         {
           dataPropName: 'firstName',
           labelText: 'Имя',
-          inputValue: this.$store.state.user.firstName,
+          inputValue: this.currentUser.firstName,
           inputTypeProp: 'text',
           isRequired: true
         },
         {
           dataPropName: 'lastName',
           labelText: 'Фамилия',
-          inputValue: this.$store.state.user.lastName,
+          inputValue: this.currentUser.lastName,
           inputTypeProp: 'text'
         }
-      ],
-      checkboxArr: [{}]
+      ]
+    }
+  },
+  data() {
+    return {
+      newUserData: {},
+      beerGrades: this.currentUser.beerGrade.split(',').map(b => b.trim())
     }
   },
   methods: {
@@ -91,6 +101,7 @@ export default {
     onInput(str, propName) {
       this.newUserData[propName] = str
     },
+    onCheckboxChange(_, beerGrade) {},
     async onSubmit() {
       if (Object.keys(this.newUserData).length) {
         const res = await this.$store.dispatch('UPDATE_PROFILE', this.newUserData)
@@ -112,9 +123,9 @@ export default {
   }
   &-form {
     & > * {
-      padding-bottom: 35px;
+      margin-bottom: 30px;
       &:last-child {
-        padding-bottom: 0;
+        margin-bottom: 0;
       }
     }
   }

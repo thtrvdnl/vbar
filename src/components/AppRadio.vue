@@ -1,7 +1,7 @@
 <template>
-  <div class="checkbox-wrapper">
-    <input @change="$emit('change', value)" :value="value" :id="id" type="checkbox" class="checkbox" />
-    <label :for="id" class="checkbox-label"><slot></slot></label>
+  <div class="radio-wrapper">
+    <input :id="id" type="radio" :name="name" class="radio" />
+    <label :for="id" class="radio-label"><slot></slot></label>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
       type: String,
       default: () => `id-${getRandomHex()}`
     },
-    value: {
+    name: {
       type: String,
       required: true
     }
@@ -25,7 +25,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/vars';
 
-.checkbox {
+.radio {
   display: none;
 
   &:focus,
@@ -56,7 +56,7 @@ export default {
       height: 20px;
       background: transparent;
       border: 1px solid blue;
-      border-radius: 3px;
+      border-radius: 50%;
       transition-property: background, color;
       transition-duration: 0.133s;
       transition-timing-function: ease-in-out;

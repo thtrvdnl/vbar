@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt requirements.txt
-COPY ./src /app
+#COPY ./src /app
 COPY entrypoint.sh /entrypoint.sh
 
 RUN pip install --upgrade pip

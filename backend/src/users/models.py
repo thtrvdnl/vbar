@@ -21,15 +21,18 @@ class User(AbstractUser):
     topics_communication = models.CharField(max_length=350, blank=True)
     vk = models.CharField(max_length=350, blank=True, null=True)
 
-"""
-class Friend(models.Model):
-    user_from = models.ForeignKey('User', on_delete=models.CASCADE)
-    user_to = models.ForeignKey('User', on_delete=models.CASCADE)
-    created = models.DateField(auto_now_add=True, db_index=True)
+
+class UserFollowing(models.Model):
+    """ The attitude of users to each other. """
+    CHOICES = (('like', 'Like'), ('dislike', 'Dislike'), ('locked', 'Locked'))
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='user')
+    subscribed = models.ForeignKey('User', on_delete=models.CASCADE, related_name='subscribed')
+    created = models.DateField(auto_now_add=True)
+    rating = models.CharField(max_length=7, choices=CHOICES, null=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return f'{self.user_from} follows {self.user_to}'
-"""
+        return f'{self.subscribed} follows {self.user}'
+

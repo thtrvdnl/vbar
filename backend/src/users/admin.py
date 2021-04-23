@@ -1,11 +1,11 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, UserFollowing
 
 
 class UserNetAdmin(UserAdmin):
-    list_display = ('username', 'email', 'phone', 'first_name', 'last_name', 'is_staff')
+    list_display = ('username', 'email', 'phone', 'first_name', 'last_name', 'is_active', 'is_staff')
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'middle_name', 'email')}),
@@ -18,3 +18,4 @@ class UserNetAdmin(UserAdmin):
 
 
 admin.site.register(User, UserNetAdmin)
+admin.site.register(UserFollowing)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, UserFollowing
 
 
 class GetUserProfileSerializer(serializers.ModelSerializer):
@@ -31,3 +31,8 @@ class GetUserPublickSerializer(serializers.ModelSerializer):
             'avatar'
         )
 
+
+class UserFollowViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserFollowing
+        exclude = ('created', )

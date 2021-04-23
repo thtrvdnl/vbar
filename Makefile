@@ -1,4 +1,10 @@
-make_migr:
+build:
+	docker-compose -f docker-compose.yml build
+up:
+	docker-compose -f docker-compose.yml up
+down:
+	docker-compose down -v
+makemigr:
 	docker-compose run --rm backend sh -c "python manage.py makemigrations users"
 migr:
 	docker-compose run --rm backend sh -c "python manage.py migrate"
